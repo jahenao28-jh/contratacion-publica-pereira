@@ -6,8 +6,9 @@ Que procesos de contratacion de la Alcaldia de Pereira registrados en SECOP II e
 
 ## Integrantes
 
-- [Tu nombre]
-- [Nombre de companero/a]
+* William Torres Valencia
+* Jhon Alexander Duque Buriticá
+* Jorge Alberto Henao Vergel
 
 ## Fuentes de datos
 
@@ -16,9 +17,10 @@ Que procesos de contratacion de la Alcaldia de Pereira registrados en SECOP II e
 
 ## Estructura del repositorio
 
-- /data/raw - Datos originales sin modificar
-- /data/processed - Datos limpios y transformados
-- /notebooks - Jupyter notebooks del analisis
-- /src - Scripts de Python reutilizables
-- /reports - Reportes y documentacion generada
-- /figures - Graficos y visualizaciones
+* /data/raw - Datos originales sin modificar
+* /data/processed - Datos limpios y transformados
+* /notebooks - Jupyter notebooks del analisis
+* /src - Scripts de Python reutilizables
+* /reports - Reportes y documentacion generada
+* /figures - Graficos y visualizaciones
+
