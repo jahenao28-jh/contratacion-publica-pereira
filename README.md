@@ -19,7 +19,7 @@
 
 ## Estructura del repositorio
 
-- `/data/raw` — Datos originales sin modificar (no se versionan; ver "Cómo reproducir")
+- `/data/raw` — Datos originales sin modificar: los dos Excel de contratos (versionados) y el CSV de procesos (se descarga; ver "Cómo reproducir")
 - `/data/processed` — Datos limpios y transformados
 - `/notebooks` — Jupyter notebooks del análisis
   - `01_ingesta.ipynb` — Adquisición: lectura de las dos fuentes, cruce Contratos ↔ Procesos, verificación de filas y diccionario de datos
@@ -72,10 +72,12 @@
 ## Cómo reproducir
 
 1. Clonar el repositorio e instalar dependencias: `pip install -r requirements.txt`
-2. Descargar los datos de contratos de la Alcaldía de Pereira desde el dataset [`jbjy-vk9h`](https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h/about_data) y guardarlos en `data/raw/` como:
+2. Los contratos ya vienen en `data/raw/`, exportados del dataset [`jbjy-vk9h`](https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h/about_data) el 29 de septiembre de 2026:
    - `Vista-_Contratos_Alcaldia_de_Pereira_2020-2023.xlsx`
    - `Vista-_Contratos_Alcaldia_de_Pereira_2024-2026.xlsx`
-3. Descargar los procesos: `python src/descargar_procesos.py` (queda en `data/raw/procesos_pereira_p6dx-8zbt.csv`). Si se omite este paso, el notebook los descarga solo.
-4. Ejecutar `notebooks/01_ingesta.ipynb`. Los resultados quedan en `data/processed/`. En Google Colab basta con subir los dos archivos de contratos al panel de archivos.
 
-Los datos crudos están excluidos del control de versiones (`.gitignore`).
+   Se versionan porque SECOP se actualiza a diario y una descarga nueva no daría exactamente las mismas filas.
+3. Descargar los procesos: `python src/descargar_procesos.py` (queda en `data/raw/procesos_pereira_p6dx-8zbt.csv`). Si se omite este paso, el notebook los descarga solo.
+4. Ejecutar `notebooks/01_ingesta.ipynb`. Los resultados quedan en `data/processed/`. En Google Colab basta con subir al panel de archivos los dos Excel de `data/raw/`.
+
+El CSV de procesos y los resultados de `data/processed/` no se versionan (`.gitignore`): se vuelven a generar con el script y el notebook.
