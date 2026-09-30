@@ -5,10 +5,11 @@ data/external/*
 !data/raw/.gitkeep
 !data/processed/.gitkeep
 !data/external/.gitkeep
-# Los dos Excel de contratos sí se versionan: SECOP se actualiza a diario y una
-# descarga nueva no daría exactamente las mismas filas.
+# Los datos crudos de las dos fuentes sí se versionan: SECOP se actualiza a diario
+# y una descarga nueva no daría exactamente las mismas filas.
 !data/raw/Vista-_Contratos_Alcaldia_de_Pereira_2020-2023.xlsx
 !data/raw/Vista-_Contratos_Alcaldia_de_Pereira_2024-2026.xlsx
+!data/raw/procesos_pereira_p6dx-8zbt.csv
 
 # Entornos virtuales
 .venv/

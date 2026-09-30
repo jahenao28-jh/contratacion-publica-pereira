@@ -19,7 +19,7 @@
 
 ## Estructura del repositorio
 
-- `/data/raw` — Datos originales sin modificar: los dos Excel de contratos (versionados) y el CSV de procesos (se descarga; ver "Cómo reproducir")
+- `/data/raw` — Datos originales sin modificar de las dos fuentes (ver "Cómo reproducir")
 - `/data/processed` — Datos limpios y transformados
 - `/notebooks` — Jupyter notebooks del análisis
   - `01_ingesta.ipynb` — Adquisición: lectura de las dos fuentes, cruce Contratos ↔ Procesos, verificación de filas y diccionario de datos
@@ -72,12 +72,11 @@
 ## Cómo reproducir
 
 1. Clonar el repositorio e instalar dependencias: `pip install -r requirements.txt`
-2. Los contratos ya vienen en `data/raw/`, exportados del dataset [`jbjy-vk9h`](https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h/about_data) el 29 de septiembre de 2026:
-   - `Vista-_Contratos_Alcaldia_de_Pereira_2020-2023.xlsx`
-   - `Vista-_Contratos_Alcaldia_de_Pereira_2024-2026.xlsx`
+2. Los datos de las dos fuentes ya vienen en `data/raw/`, tal como se obtuvieron el 29 de septiembre de 2026:
+   - `Vista-_Contratos_Alcaldia_de_Pereira_2020-2023.xlsx` y `Vista-_Contratos_Alcaldia_de_Pereira_2024-2026.xlsx`: contratos exportados del dataset [`jbjy-vk9h`](https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Contratos-Electr-nicos/jbjy-vk9h/about_data).
+   - `procesos_pereira_p6dx-8zbt.csv`: procesos descargados del dataset [`p6dx-8zbt`](https://www.datos.gov.co/Estad-sticas-Nacionales/SECOP-II-Procesos-de-Contrataci-n/p6dx-8zbt/about_data) con `python src/descargar_procesos.py`.
 
-   Se versionan porque SECOP se actualiza a diario y una descarga nueva no daría exactamente las mismas filas.
-3. Descargar los procesos: `python src/descargar_procesos.py` (queda en `data/raw/procesos_pereira_p6dx-8zbt.csv`). Si se omite este paso, el notebook los descarga solo.
-4. Ejecutar `notebooks/01_ingesta.ipynb`. Los resultados quedan en `data/processed/`. En Google Colab basta con subir al panel de archivos los dos Excel de `data/raw/`.
+   Se versionan porque SECOP se actualiza a diario y una descarga nueva no daría exactamente las mismas filas. Para trabajar con procesos más recientes basta con volver a correr el script, sabiendo que las cifras del cruce pueden cambiar.
+3. Ejecutar `notebooks/01_ingesta.ipynb`. Los resultados quedan en `data/processed/`. En Google Colab hay que subir al panel de archivos los tres archivos de `data/raw/`; si solo se suben los dos Excel, el notebook descarga los procesos de la API.
 
-El CSV de procesos y los resultados de `data/processed/` no se versionan (`.gitignore`): se vuelven a generar con el script y el notebook.
+Los resultados de `data/processed/` no se versionan (`.gitignore`): se vuelven a generar al correr el notebook.
