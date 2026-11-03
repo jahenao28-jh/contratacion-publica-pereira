@@ -21,11 +21,8 @@
 
 - `/data/raw` — Datos originales sin modificar de las dos fuentes (ver "Cómo reproducir")
 - `/data/processed` — Datos limpios y transformados
-- `/notebooks` — Jupyter notebooks del análisis
-  - `01_ingesta.ipynb` — Adquisición: lectura de las dos fuentes, cruce Contratos ↔ Procesos, verificación de filas y diccionario de datos
-  - `02_eda.ipynb` — Análisis exploratorio (pendiente)
-  - `03_anomalias.ipynb` — Concentración de proveedores y montos atípicos (pendiente)
-  - `04_dashboard.ipynb` — Visualización de resultados (pendiente)
+- `/notebooks` — Notebook único del proyecto
+  - `01_ingesta.ipynb` — Corte 1 (secciones 1 a 10): lectura de las dos fuentes, cruce Contratos ↔ Procesos, verificación de filas y diccionario de datos. Checkpoint 1 (secciones 11 a 14): calidad de datos, análisis exploratorio, ingeniería de características y pipeline, y la matriz para la segmentación
 - `/src` — Scripts de Python reutilizables
   - `descargar_procesos.py` — Descarga los procesos de Pereira desde la API de SECOP II
 - `/reports` — Reportes y documentación generada
@@ -41,10 +38,15 @@
 - [x] Cruce Contratos ↔ Procesos por `proceso_de_compra` con verificación de filas antes y después
 - [x] Diccionario de datos de las 30 columnas del dataset cruzado
 - [x] Subconjunto de análisis 2022-2025 alineado con la Ficha
-- [ ] Limpieza y estandarización de categorías
-- [ ] Análisis exploratorio
-- [ ] Detección de concentración y montos atípicos
-- [ ] Dashboard y conclusiones
+
+**Corte 2 — Checkpoint 1** (secciones 11 a 14 del notebook)
+
+- [x] Calidad de datos: tipos corregidos y valores atípicos tratados, con la justificación de cada caso
+- [x] Análisis exploratorio: estadísticas descriptivas, 6 gráficos e historia de 5 hallazgos
+- [x] Ingeniería de características: 6 variables derivadas, codificación one-hot, escalado y la función reproducible `preparar_dataset`
+- [x] Primera lista de contratos a revisar según sus señales de alerta
+- [ ] Segmentación (se completa en clase)
+- [ ] Detección de anomalías, dashboard y conclusiones
 
 ### Resultados de la adquisición
 
@@ -60,14 +62,23 @@
 | Dataset final | 40.275 filas × 30 columnas |
 | Subconjunto 2022-2025 | 24.779 filas |
 
+### Hallazgos del análisis exploratorio (2022-2025)
+
+1. **La competencia casi no actúa como control.** El 95,9 % de los contratos fue por contratación directa, y donde hubo convocatoria, el 35,4 % de los procesos (210 de 594) recibió una sola oferta.
+2. **En año electoral, la contratación directa se comprime en enero.** Enero de 2022 (3.297 contratos) y enero de 2026 (3.587) son los dos meses más altos de la serie; en los demás años el pico fue febrero de 2023, con 1.700. Entre marzo y mayo de 2022, con la Ley de Garantías vigente, iniciaron 16.
+3. **Pocos proveedores reciben la mitad del dinero.** 16 de 8.600 proveedores reciben el 50 % del valor, y el 1 % de los proveedores, el 73,6 %.
+4. **Una dependencia concentra casi todo en un contrato.** En la Secretaría Jurídica el índice HHI es 9.020: HERNÁNDEZ RODAS S.A.S recibe el 95,0 % de su valor con un contrato de 240.380 millones por servicios profesionales de apoyo a la defensa jurídica.
+5. **Cientos de contratos crecieron hasta el tope legal.** 724 contratos terminaron valiendo exactamente 1,5 veces su precio base, el máximo de adiciones que permite la ley (50 %), frente a 241 entre 1,45 y 1,4999.
+
 ## Riesgos y hallazgos
 
 - **Procesos repetidos en la fuente 2.** SECOP publica el mismo proceso varias veces (2.450 filas idénticas y una fila por fase en 522 procesos). Cruzar sin depurar inflaba el resultado de 40.275 a 45.384 filas. Se resolvió dejando la última fase publicada de cada proceso y exigiendo `validate="many_to_one"` en el `merge`.
 - **Contratos sin proceso publicado.** 2.752 contratos (6,8 %), casi todos de contratación directa y sobre todo desde 2024, no tienen proceso en el dataset `p6dx-8zbt`, ni siquiera buscándolos sin filtrar por entidad. Se conservan marcados con `tiene_proceso = False`.
-- `estado_contrato` mezcla formatos (`Cerrado`, `terminado`, `cedido`) y contiene estados como `Borrador` y `Aprobado` que podrían no ser contratos formalizados.
-- `modalidad_de_contratacion` tiene categorías casi duplicadas (p. ej. `Contratación directa` y `Contratación Directa (con ofertas)`).
-- `tipo_de_contrato` incluye categorías ambiguas (`Otro`, `Decreto 092 de 2017`).
-- Hay 2 contratos con fecha de inicio posterior a la fecha de consulta y 3 con fecha de fin anterior al inicio, que se revisarán en la limpieza.
+- **Un valor imposible.** Un contrato cancelado figuraba por 9,1 × 10¹⁵ pesos: exactamente su precio base al cuadrado y 2.571 veces la suma de todos los demás. Sin corregirlo, los 10 mayores proveedores "concentraban" el 100 % del dinero. Se corrigió al precio base.
+- **Identificadores y categorías escritos de varias formas.** 118 documentos de proveedor tenían puntos o asteriscos y 35 contratos no tenían documento; el estado mezclaba mayúsculas y minúsculas; las 11 modalidades son 6 y los 20 nombres de dependencia son 17. Todo se unificó en la sección 11.
+- **Contratos sin valor real o sin ejecutar.** 154 contratos valen cero o un valor simbólico (0,01, 0,10 o 1 peso) y 10 son borradores o cancelados: quedan fuera del análisis de dinero, y los de servicios o consultoría se marcan como error.
+- **Fechas incoherentes.** 3 contratos terminan antes de iniciar: se marcan y su duración queda vacía. Los 2 que inician después de la fecha de corte (29 de septiembre de 2026) son contratos programados, no errores.
+- **Montos atípicos.** Se marcan sin borrarlos (509 altos y 664 bajos, comparados con contratos del mismo tipo), porque son justamente lo que Control Interno necesita revisar.
 
 ## Cómo reproducir
 
