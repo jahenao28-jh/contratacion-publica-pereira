@@ -43,7 +43,7 @@
 
 - [x] Calidad de datos: tipos corregidos y valores atípicos tratados, con la justificación de cada caso
 - [x] Análisis exploratorio: estadísticas descriptivas, 6 gráficos e historia de 5 hallazgos
-- [x] Ingeniería de características: 6 variables derivadas, codificación one-hot, escalado y la función reproducible `preparar_dataset`
+- [x] Ingeniería de características: 6 variables derivadas, codificación one-hot, escalado y las funciones reproducibles `preparar_dataset` y `proceso_completo`, que va de los archivos originales a la matriz final
 - [x] Primera lista de contratos a revisar según sus señales de alerta
 - [ ] Segmentación (se completa en clase)
 - [ ] Detección de anomalías, dashboard y conclusiones
