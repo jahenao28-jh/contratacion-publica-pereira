@@ -38,12 +38,14 @@ for nombre, archivo in [("DejaVu", "DejaVuSans.ttf"), ("DejaVu-Bold", "DejaVuSan
 pdfmetrics.registerFontFamily("DejaVu", normal="DejaVu", bold="DejaVu-Bold", italic="DejaVu-Oblique",
                               boldItalic="DejaVu-BoldOblique")
 
-AZUL, GRIS = colors.HexColor("#1f3b5c"), colors.HexColor("#5a6470")
+# Paleta: verde petróleo para títulos y encabezados, gris cálido para el texto secundario y los fondos
+PRINCIPAL, GRIS = colors.HexColor("#1e5b5e"), colors.HexColor("#5c5a55")
+ENLACE = "#2f7a7d"
 E = {
-    "titulo": ParagraphStyle("titulo", fontName="DejaVu-Bold", fontSize=17, leading=21, textColor=AZUL),
+    "titulo": ParagraphStyle("titulo", fontName="DejaVu-Bold", fontSize=17, leading=21, textColor=PRINCIPAL),
     "subtitulo": ParagraphStyle("subtitulo", fontName="DejaVu", fontSize=9, leading=12, textColor=GRIS),
-    "h1": ParagraphStyle("h1", fontName="DejaVu-Bold", fontSize=13.5, leading=17, textColor=AZUL, spaceBefore=6, spaceAfter=6),
-    "h2": ParagraphStyle("h2", fontName="DejaVu-Bold", fontSize=10.5, leading=14, textColor=AZUL, spaceBefore=8, spaceAfter=3),
+    "h1": ParagraphStyle("h1", fontName="DejaVu-Bold", fontSize=13.5, leading=17, textColor=PRINCIPAL, spaceBefore=6, spaceAfter=6),
+    "h2": ParagraphStyle("h2", fontName="DejaVu-Bold", fontSize=10.5, leading=14, textColor=PRINCIPAL, spaceBefore=8, spaceAfter=3),
     "texto": ParagraphStyle("texto", fontName="DejaVu", fontSize=9, leading=12.6, spaceAfter=4),
     "viñeta": ParagraphStyle("viñeta", fontName="DejaVu", fontSize=9, leading=12.6, leftIndent=12, bulletIndent=2, spaceAfter=2.5),
     "pie": ParagraphStyle("pie", fontName="DejaVu-Oblique", fontSize=7.5, leading=10, textColor=GRIS, alignment=TA_CENTER,
@@ -84,11 +86,11 @@ def tabla(filas, anchos_cm, encabezado=True):
     datos = [[c if isinstance(c, Paragraph) else p(str(c), "celda_n" if encabezado and i == 0 else "celda")
               for c in fila] for i, fila in enumerate(filas)]
     t = Table(datos, colWidths=[a * cm for a in anchos_cm], repeatRows=1 if encabezado else 0)
-    estilo = [("VALIGN", (0, 0), (-1, -1), "TOP"), ("GRID", (0, 0), (-1, -1), 0.3, colors.HexColor("#c9d1db")),
+    estilo = [("VALIGN", (0, 0), (-1, -1), "TOP"), ("GRID", (0, 0), (-1, -1), 0.3, colors.HexColor("#d6d3cb")),
               ("TOPPADDING", (0, 0), (-1, -1), 2.5), ("BOTTOMPADDING", (0, 0), (-1, -1), 2.5),
-              ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f2f5f9")])]
+              ("ROWBACKGROUNDS", (0, 1), (-1, -1), [colors.white, colors.HexColor("#f3f2ee")])]
     if encabezado:
-        estilo.append(("BACKGROUND", (0, 0), (-1, 0), AZUL))
+        estilo.append(("BACKGROUND", (0, 0), (-1, 0), PRINCIPAL))
     t.setStyle(TableStyle(estilo))
     return t
 
@@ -137,7 +139,7 @@ def construir():
     historia += [
         p("Contratación pública de la Alcaldía de Pereira: dónde mirar primero", "titulo"),
         p(f"Proyecto final · Minería de Datos · CIAF · 24 de noviembre de 2026<br/>{INTEGRANTES}<br/>"
-          f'Repositorio: <a href="{REPOSITORIO}" color="#1f5fa8">{REPOSITORIO}</a>', "subtitulo"),
+          f'Repositorio: <a href="{REPOSITORIO}" color="{ENLACE}">{REPOSITORIO}</a>', "subtitulo"),
         Spacer(1, 8),
         p("1. Resumen ejecutivo", "h1"),
         p(f"<b>El problema.</b> La Alcaldía de Pereira registra en SECOP II miles de contratos al año: {es(m['contratos_total'])} "
@@ -291,7 +293,7 @@ def construir():
         Spacer(1, 6),
         p("Cómo verificarlo y reproducirlo", "h2"),
         *viñetas([
-            f'Notebook con todas las salidas y gráficos: <a href="{NOTEBOOK}" color="#1f5fa8">{NOTEBOOK}</a>',
+            f'Notebook con todas las salidas y gráficos: <a href="{NOTEBOOK}" color="{ENLACE}">{NOTEBOOK}</a>',
             "En Google Colab: subir el notebook y los tres archivos de <i>data/raw/</i>, y ejecutar todo (unos 4 minutos). En un "
             "computador: <i>pip install -r requirements.txt</i> y ejecutar <i>notebooks/01_ingesta.ipynb</i>.",
             "Este informe se regenera con <i>python src/generar_informe.py</i>: toma sus cifras de <i>reports/metricas_clave.json</i>, "
