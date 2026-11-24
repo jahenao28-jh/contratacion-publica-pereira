@@ -1,0 +1,169 @@
+{
+  "contratos_total": 40275,
+  "contratos_alcance": 24779,
+  "contratos_dinero": 24678,
+  "valor_total_billones": 2.5566960611549003,
+  "pct_directa": 95.9320392267646,
+  "proveedores": 8600,
+  "segmentos": {
+    "Servicios cortos": {
+      "contratos": 10533.0,
+      "% de los contratos": 42.68174082178459,
+      "% del valor": 4.0373376665884475,
+      "valor mediano (millones)": 9.97,
+      "duración mediana (días)": 101.0,
+      "% contratación directa": 98.52843444412798,
+      "% directos en enero electoral": 4.927371119339219,
+      "% con un solo oferente": 0.0949397132820659,
+      "participación media del proveedor (%)": 0.13981522918172049,
+      "% con monto atípico": 0.0,
+      "% adicionados al tope": 1.5190354125130543
+    },
+    "Servicios de año completo": {
+      "contratos": 12896.0,
+      "% de los contratos": 52.25707107545182,
+      "% del valor": 13.691091573305805,
+      "valor mediano (millones)": 23.5776955,
+      "duración mediana (días)": 227.0,
+      "% contratación directa": 98.98418114143921,
+      "% directos en enero electoral": 21.378722084367247,
+      "% con un solo oferente": 0.16284119106699751,
+      "participación media del proveedor (%)": 0.21117797721229037,
+      "% con monto atípico": 0.23263027295285357,
+      "% adicionados al tope": 4.21060794044665
+    },
+    "Contratos medianos con convocatoria": {
+      "contratos": 1113.0,
+      "% de los contratos": 4.510089958667639,
+      "% del valor": 26.1138458351667,
+      "valor mediano (millones)": 161.3,
+      "duración mediana (días)": 80.0,
+      "% contratación directa": 41.59928122192273,
+      "% directos en enero electoral": 0.8984725965858041,
+      "% con un solo oferente": 12.848158131176998,
+      "participación media del proveedor (%)": 2.178988744877731,
+      "% con monto atípico": 26.41509433962264,
+      "% adicionados al tope": 4.40251572327044
+    },
+    "Grandes contratos concentrados": {
+      "contratos": 136.0,
+      "% de los contratos": 0.5510981440959559,
+      "% del valor": 56.15772492493903,
+      "valor mediano (millones)": 3226.909363,
+      "duración mediana (días)": 255.0,
+      "% contratación directa": 47.794117647058826,
+      "% directos en enero electoral": 1.4705882352941175,
+      "% con un solo oferente": 29.411764705882355,
+      "participación media del proveedor (%)": 28.52656627366914,
+      "% con monto atípico": 36.76470588235294,
+      "% adicionados al tope": 4.411764705882353
+    }
+  },
+  "grandes_pct_contratos": 0.5510981440959559,
+  "grandes_pct_valor": 56.15772492493903,
+  "modelo_validacion": {
+    "2022|2023|regresión logística": {
+      "ROC-AUC": 0.6648572972917188,
+      "PR-AUC": 0.07316905882724778,
+      "PR-AUC del azar": 0.04945150618143827,
+      "captura en el 10 % de mayor riesgo": 0.09154929577464789,
+      "veces mejor que el azar": 0.9143784445805266
+    },
+    "2022|2023|gradient boosting": {
+      "ROC-AUC": 0.6677050303285181,
+      "PR-AUC": 0.08053050274900726,
+      "PR-AUC del azar": 0.04945150618143827,
+      "captura en el 10 % de mayor riesgo": 0.15845070422535212,
+      "veces mejor que el azar": 1.5798305457746478
+    },
+    "2022-2023|2024|regresión logística": {
+      "ROC-AUC": 0.8519759753776872,
+      "PR-AUC": 0.1406863074039049,
+      "PR-AUC del azar": 0.042518837459634015,
+      "captura en el 10 % de mayor riesgo": 0.43037974683544306,
+      "veces mejor que el azar": 4.2685706563358705
+    },
+    "2022-2023|2024|gradient boosting": {
+      "ROC-AUC": 0.7949036619602505,
+      "PR-AUC": 0.0959018480677566,
+      "PR-AUC del azar": 0.042518837459634015,
+      "captura en el 10 % de mayor riesgo": 0.2109704641350211,
+      "veces mejor que el azar": 2.092436596243074
+    },
+    "2022-2024|2025|regresión logística": {
+      "ROC-AUC": 0.9343758829724383,
+      "PR-AUC": 0.39439701330656923,
+      "PR-AUC del azar": 0.01820795400095831,
+      "captura en el 10 % de mayor riesgo": 0.881578947368421,
+      "veces mejor que el azar": 8.80313523042055
+    },
+    "2022-2024|2025|gradient boosting": {
+      "ROC-AUC": 0.9364789627803036,
+      "PR-AUC": 0.24258763872475253,
+      "PR-AUC del azar": 0.01820795400095831,
+      "captura en el 10 % de mayor riesgo": 0.8157894736842105,
+      "veces mejor que el azar": 8.146184840090658
+    }
+  },
+  "modelo_auc_2024": 0.8519759753776872,
+  "modelo_captura_2024": 43.037974683544306,
+  "modelo_lift_2024": 4.2685706563358705,
+  "vigilancia_2026_contratos": 4858,
+  "vigilancia_2026_top10pct": 486,
+  "anomalias": 247,
+  "anomalias_pct_valor": 67.58620023717747,
+  "revision_contratos": 305,
+  "revision_pct_valor": 68.06187783839557,
+  "contratos_2020_2023": 22522,
+  "contratos_2024_2026": 17753,
+  "procesos_descargados": 43863,
+  "pct_con_proceso": 93.16697703289883,
+  "sin_proceso": 2752,
+  "valor_imposible": 9128949067345156.0,
+  "documentos_corregidos": 118,
+  "sin_documento": 35,
+  "atipicos_altos": 509,
+  "atipicos_bajos": 664,
+  "procesos_con_convocatoria": 594,
+  "procesos_un_oferente": 210,
+  "enero_2022": 3297,
+  "enero_2026": 3587,
+  "pico_no_electoral_mes": "2023-02",
+  "pico_no_electoral": 1700,
+  "marzo_mayo_2022": 16,
+  "proveedores_mitad_valor": 16,
+  "pct_valor_top1pct_proveedores": 73.63856946301931,
+  "hhi_juridica": 9019.997455503022,
+  "hhi_mediana": 1137.8078365518966,
+  "pct_mayor_proveedor_juridica": 94.97234502437502,
+  "contratos_con_precio_base": 22835,
+  "contratos_tope": 758,
+  "tope_exacto": 724,
+  "tope_vecinos": 241,
+  "tope_por_anio": {
+    "2022": {
+      "contratos": 7344,
+      "en_tope": 161,
+      "pct": 2.1922657952069717
+    },
+    "2023": {
+      "contratos": 5743,
+      "en_tope": 284,
+      "pct": 4.945150618143828
+    },
+    "2024": {
+      "contratos": 5574,
+      "en_tope": 237,
+      "pct": 4.251883745963402
+    },
+    "2025": {
+      "contratos": 4174,
+      "en_tope": 76,
+      "pct": 1.820795400095831
+    }
+  },
+  "anomalias_sin_senal": 13,
+  "atipicos_no_bosque": 286,
+  "atipicos_alcance": 374,
+  "revision_grandes": 132
+}

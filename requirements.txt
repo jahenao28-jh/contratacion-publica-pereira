@@ -3,3 +3,4 @@ openpyxl
 jupyter
 matplotlib
 scikit-learn
+reportlab
