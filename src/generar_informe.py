@@ -214,7 +214,7 @@ def construir():
           "riesgo de terminar así. Entrenada con 2022-2023 y probada con 2024, al revisar el 10 % de mayor riesgo encuentra el "
           f"{pct(m['modelo_captura_2024'])} de los contratos que llegaron al tope (ROC-AUC de {es(m['modelo_auc_2024'], 3)}): "
           f"{es(m['modelo_lift_2024'], 1)} veces más que una revisión al azar. Lo que más pesa es el mes de inicio: los contratos que "
-          "arrancan en febrero o marzo son los que más se estiran."),
+          "arrancan entre enero y marzo son los que más se estiran."),
         Table([[figura("tablero_5_modelo.png", 8.4)[0], figura("tablero_7_meses.png", 8.4)[0]]],
               colWidths=[8.6 * cm, 8.6 * cm]),
         p("Izquierda: contratos de 2024 encontrados según la parte revisada, frente a una revisión al azar. Derecha: porcentaje de "
